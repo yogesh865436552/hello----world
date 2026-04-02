@@ -1,10 +1,20 @@
-name: C Build
-on: [push]
-jobs:
-  run-code: # This is the name that will appear on the left instead of "build"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: gcc hello.c -o hello
-      - run: ./hello
+name: C Program Workflow
 
+# This tells GitHub WHEN to run the job
+on: [push, pull_request]
+
+jobs:
+  John:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true 
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Compile Hello World
+        run: gcc hello.c -o hello
+        
+      - name: Run Program
+        run: ./hello
