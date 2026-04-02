@@ -1,20 +1,21 @@
-name: C Program Workflow
+name: C Hello World
 
-# This tells GitHub WHEN to run the job
-on: [push, pull_request]
+on: [push]
 
 jobs:
-  John:
+  build:
     runs-on: ubuntu-latest
+    # This environment variable forces ALL actions in this job to use Node 24
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true 
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        # v5 officially supports Node 24 and removes the warning
+        uses: actions/checkout@v5
       
-      - name: Compile Hello World
+      - name: Compile
         run: gcc hello.c -o hello
         
-      - name: Run Program
+      - name: Run
         run: ./hello
